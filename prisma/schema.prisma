@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  GRADUATE
+}
+
+model User {
+  id       String    @id @default(uuid()) @db.Uuid
+  dni      Int       @unique @db.Integer
+  password String    @db.VarChar(100)
+  role     Role      @default(GRADUATE)
+  graduate Graduate?
+  admin    Admin?
+
+  @@map("users")
+}
+
+model Graduate {
+  id             String @id @default(uuid()) @db.Uuid
+  card           Int    @db.Integer
+  programName    String @db.VarChar(100)
+  nis            Int    @db.Integer
+  documentType   String @db.VarChar(50)
+  documentNumber Int    @unique @db.Integer
+  name           String @db.VarChar(255)
+  email          String @db.VarChar(255)
+  phone          String @db.VarChar(50)
+  altPhone       String @db.VarChar(50)
+  cellPhone      String @db.VarChar(50)
+
+  user User @relation(fields: [documentNumber], references: [dni], onUpdate: Cascade)
+
+  @@map("graduates")
+}
+
+model Admin {
+  id             String @id @default(uuid()) @db.Uuid
+  documentType   String @db.VarChar(50)
+  documentNumber Int    @unique @db.Integer
+  name           String @db.VarChar(255)
+  email          String @db.VarChar(255)
+
+  user User @relation(fields: [documentNumber], references: [dni], onUpdate: Cascade)
+
+  @@map("admins")
+}
