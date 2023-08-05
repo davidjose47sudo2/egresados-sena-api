@@ -4,7 +4,6 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  IsStrongPassword,
 } from 'class-validator';
 
 export class LoginDto
@@ -17,6 +16,5 @@ export class LoginDto
 
   @IsNotEmpty()
   @IsString()
-  @IsStrongPassword({ minSymbols: 0 })
   readonly password: string;
 }
