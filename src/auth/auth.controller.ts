@@ -6,7 +6,6 @@ import {
   HttpStatus,
   Post,
   Res,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { JWT_COOKIE_NAME } from './auth.constants';
@@ -26,11 +25,16 @@ export class AuthController {
     const user = await this.authService.login(body.dni, body.password);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new BadRequestException('Invalid credentials');
     }
 
     const { id, dni, role } = user;
-    res.cookie(JWT_COOKIE_NAME, await this.authService.createToken({ id, dni, role }));
+    res.cookie(JWT_COOKIE_NAME, await this.authService.createToken({ id, dni, role }), {
+      httpOnly: false,
+      maxAge: 1000 * 60 * 60 * 24,
+      secure: false,
+      sameSite: 'none',
+    });
 
     return { message: 'Login success' };
   }
