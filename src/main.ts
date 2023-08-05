@@ -9,7 +9,7 @@ import { AppModule } from './app.module';
   // Enable CORS
   app.enableCors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [
       'Origin',
