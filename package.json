@@ -1,5 +1,8 @@
 {
   "name": "egresados-sena-api",
+  "engines": {
+    "node": "18.x"
+  },
   "private": true,
   "scripts": {
     "build": "nest build",
