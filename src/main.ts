@@ -7,7 +7,7 @@ import { AppModule } from './app.module';
   const app = await NestFactory.create(AppModule);
 
   // Enable CORS
-  app.enableCors({ origin: '*' });
+  app.enableCors();
 
   // Enable Cookies
   app.use(cookieParser(process.env.COOKIE_SECRET, {}));
