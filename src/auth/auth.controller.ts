@@ -34,6 +34,7 @@ export class AuthController {
       maxAge: 1000 * 60 * 60 * 24,
       secure: true,
       sameSite: 'none',
+      domain:"egresadosena-client.vercel.app",
     });
 
     return { message: 'Login success' };
