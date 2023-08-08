@@ -33,7 +33,8 @@ export class AuthController {
       httpOnly: false,
       maxAge: 1000 * 60 * 60 * 24,
       secure: true,
-      sameSite: 'lax',
+      sameSite: 'none',
+      domain:"vercel.app"
     });
 
     return { message: 'Login success' };
