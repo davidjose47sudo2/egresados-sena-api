@@ -9,7 +9,7 @@ import { AppModule } from './app.module';
   // Enable CORS
   app.enableCors({
     credentials: true,
-    origin: '*',
+    origin: ["https://egresadosena-client.vercel.app","http://localhost:3000"],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [
       'Origin',
@@ -18,6 +18,7 @@ import { AppModule } from './app.module';
       'Authorization',
       'Access-Control-Allow-Origin',
       'Access-Control-Allow-Credentials',
+      'credentials'
     ],
   });
 
@@ -36,5 +37,5 @@ import { AppModule } from './app.module';
   app.setGlobalPrefix('api');
 
   // Start listening
-  await app.listen(+process.env.PORT || 3000);
+  await app.listen(process.env.PORT || 3000);
 })();

@@ -32,7 +32,7 @@ export class AuthController {
     res.cookie(JWT_COOKIE_NAME, await this.authService.createToken({ id, dni, role }), {
       httpOnly: false,
       maxAge: 1000 * 60 * 60 * 24,
-      secure: false,
+      secure: true,
       sameSite: 'none',
     });
 
